@@ -15,7 +15,7 @@
         <!-- <div v-if="confirmpassword" class="error"> {{ confirmpassword }} </div> -->
     
         <div class="submit">
-            <button>Create an Account</button>
+            <button @click="pushData()">Create an Account</button>
         </div>
         
     </form>
@@ -27,6 +27,7 @@
     export default{
         data() {
             return {
+                arr1: [],
                 name: '',
                 email: '',
                 password: '',
@@ -39,11 +40,17 @@
               //validate password
               this.passwordError = this.password.length > 7 ? '' : 'Password must be at least 8 chars long';
               this.confirmpassword === this.password ? '': 'Password did not match!'
-            }
+            },
+    pushData() {
+      this.arr1.push(this.name);
+      this.arr1.push(this.email);
+      this.arr1.push(this.password);
+      console.log(this.arr1);
+    }
         }
     }
     </script>
-    <style>
+    <style scoped>
     form {
         max-width: 420px;
         margin: 30px auto;
