@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-   
+
   </div>
 </template>
 
@@ -9,7 +9,6 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String,
-    arr: Array
   },
   data() {
     return {
