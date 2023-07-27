@@ -1,80 +1,99 @@
 <template>
-<form @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleSubmit">
     <label>Email: </label>
-    <input type="text" placeholder="Enter email here" required v-model="email" />
-    <br /> <br />
+    <input
+      type="text"
+      placeholder="Enter email here"
+      required
+      v-model="email"
+    />
+    <br />
+    <br />
 
     <label>Password: </label>
-    <input type="password" placeholder="Enter password here" required v-model="password" />
-    <br /> <br />
+    <input
+      type="password"
+      placeholder="Enter password here"
+      required
+      v-model="password"
+    />
+    <br />
+    <br />
 
-    <div class="submit">
-            <button>Login</button>
+    <div class="login">
+      <button class="btn1">Login</button>
+      <!-- <button class="btn2" ><router-link to="/signup">Sign Up</router-link></button> -->
+      <router-link to="/signup">
+        <button class="btn2">Sign Up</button>
+      </router-link>
     </div>
-
-</form>
-  </template>
+  </form>
+</template>
 
 <script>
-export default{
-    data() {
-        return {
-            email: '',
-            password: '',
-            passwordError: ''
-        }
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      passwordError: "",
+    };
+  },
+  methods: {
+    handleSubmit() {
+      //validate password
+      this.passwordError =
+        this.password.length > 7
+          ? ""
+          : "Password must be at least 8 chars long";
     },
-    methods: {
-        handleSubmit(){
-          //validate password
-          this.passwordError = this.password.length > 7 ? '' : 'Passwor must be at least 8 chars long'
-        }
-    }
-}
+  },
+};
 </script>
 
 <style scoped>
 form {
-    max-width: 420px;
-    margin: 30px auto;
-    background: white;
-    text-align: left;
-    padding: 40px;
-    border-radius: 10px;
+  max-width: 420px;
+  margin: 30px auto;
+  background: white;
+  text-align: left;
+  padding: 40px;
+  border-radius: 10px;
 }
 label {
-    color: #aaa;
-    display: inline-block;
-    margin: 25px 0 15px;
-    font-size: 0.6em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: bold;
+  color: #aaa;
+  display: inline-block;
+  margin: 25px 0 15px;
+  font-size: 0.6em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
 }
 input {
-    display: block;
-    padding: 10px 6px;
-    width: 100%;
-    box-sizing: border-box;
-    border: none;
-    border-bottom: 1px solid #ddd;
-    color: #555;
+  display: block;
+  padding: 10px 6px;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  color: #555;
 }
 button {
-    background: #0b6dff;
-    border: 0;
-    padding: 10px 20px;
-    margin-top: 20px;
-    color: white;
-    border-radius: 20px;
+  background: #0b6dff;
+  border: 0;
+  padding: 10px 20px;
+  margin-top: 20px;
+  color: white;
+  border-radius: 20px;
 }
-.submit {
-    text-align: center;
+.login {
+  text-align: center;
 }
-.error {
-    color: #ff0062;
-    margin-top: 10px;
-    font-size: 0.8em;
-    font-weight: bold;
+
+.btn1 {
+  margin-right: 100px;
+}
+.btn2 {
+  margin-left: 100px;
 }
 </style>
