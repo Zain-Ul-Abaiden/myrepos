@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="handleSubmit">
+  <form @submit.prevent="handleLogin">
     <label>Email: </label>
     <input
       type="text"
@@ -7,8 +7,6 @@
       required
       v-model="email"
     />
-    <!-- <br />
-    <br /> -->
 
     <label>Password: </label>
     <input
@@ -17,12 +15,13 @@
       required
       v-model="password"
     />
+    <div v-if="error" class="error">{{ error }}</div>
+    <div v-if="successfull" class="successfull">{{ successfull }}</div>
     <br />
     <br />
 
     <div class="login">
-      <v-btn class="btn1">Login</v-btn>
-      <!-- <button class="btn2" ><router-link to="/signup">Sign Up</router-link></button> -->
+      <v-btn class="btn1" type="submit">Login</v-btn>
       <router-link to="/signup">
         <v-btn class="btn2">Sign Up</v-btn>
       </router-link>
@@ -36,20 +35,27 @@ export default {
     return {
       email: "",
       password: "",
-      passwordError: "",
+      error: "",
+      successfull: ""
     };
   },
   methods: {
-    handleSubmit() {
-      //validate password
-      this.passwordError =
-        this.password.length > 7
-          ? ""
-          : "Password must be at least 8 chars long";
+    handleLogin() {
+      // Retrieve stored email and password from local storage
+      const storedEmail = localStorage.getItem("email");
+      const storedPassword = localStorage.getItem("password");
+
+      // Check if the entered email and password match the stored values
+      if (this.email === storedEmail && this.password === storedPassword) {
+        router.push("/todo");
+      } else {
+        this.error = "Invalid email or password. Please try again.";
+      }
     },
   },
 };
 </script>
+
 
 <style scoped>
 form {
@@ -96,4 +102,13 @@ button {
 .btn2 {
   margin-left: 50px;
 }
+
+.error {
+  color: #ff0062;
+  margin-top: 10px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+
 </style>

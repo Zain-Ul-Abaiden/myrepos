@@ -1,9 +1,8 @@
 <template>
   <div class="home">
-    <p>hello tailwind</p>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>I am a homepage.</h1>
   </div>
+  <HelloWorld/>
 </template>
 
 <script>

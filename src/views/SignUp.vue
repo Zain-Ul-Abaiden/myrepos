@@ -7,6 +7,7 @@
       required
       v-model="name"
     />
+    <div v-if="nameError" class="error">{{ nameError }}</div>
 
     <label>Email:</label>
     <input
@@ -32,13 +33,11 @@
       required
       v-model="confirmPassword"
     />
+    <div v-if="passwordMatchError" class="error">{{ passwordMatchError }}</div>
 
     <div class="submit">
-            <button @click="">Create an Account</button>
-        </div>
-    <!-- <router-link to="/login">
-      <v-btn class="submit">Submit</v-btn>
-    </router-link> -->
+      <button type="submit">Create an Account</button>
+    </div>
   </form>
 </template>
 
@@ -46,31 +45,73 @@
 export default {
   data() {
     return {
-      name: "SignUp",
-      props: {
-        msg: String,
-      },
-
-        name: "",
-        email: "",
-        password: "",
-        passwordError: "",
-        confrimPassword: "",
-  
+      name: "",
+      nameError:"",
+      email: "",
+      password: "",
+      passwordError: "",
+      confirmPassword: "",
+      passwordMatchError: "",
     };
   },
   methods: {
     handleSubmit() {
-      //validate password
-      this.passwordError =
-        this.password.length > 7
-          ? ""
-          : "Password must be at least 8 chars long";
+      // Validate username
+      if (/\s/.test(this.name)) {
+        this.nameError = "Username should not contain spaces.";
+        return;
+      } else {
+        this.nameError = "";
+      }
 
-  }
-}
-}
+      if (!/[0-9!@#$%^&*(),.?":{}|<>]/.test(this.name)) {
+        this.nameError = "Username must include a number or special character.";
+        return;
+      } else {
+        this.nameError = "";
+      }
+
+      // Validate password
+      const passwordRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[A-Z])(?=.*\d).{8,}$/;
+      if (!passwordRegex.test(this.password)) {
+        this.passwordError =
+          "Password must start with a capital letter, include a special character, and be at least 8 characters long.";
+        return;
+      } else {
+        this.passwordError = "";
+      }
+
+      // Confirm password match
+      if (this.password !== this.confirmPassword) {
+        this.passwordMatchError = "Passwords do not match.";
+        return;
+      } else {
+        this.passwordMatchError = "";
+      }
+
+      // Save email and password in local storage
+      localStorage.setItem("email", this.email);
+      localStorage.setItem("password", this.password);
+
+      // If all validations pass, you can proceed with form submission or other actions
+      alert("Signup successful!");
+    },
+    
+    created() {
+    // Retrieve email from local storage when the component is created
+    const storedEmail = localStorage.getItem("email");
+    if (storedEmail) {
+      this.email = storedEmail;
+    }
+    const storedPassword = localStorage.getItem("password");
+    if (storedPassword) {
+      this.password = storedPassword;
+    }
+  },
+  },
+};
 </script>
+
 <style scoped>
 form {
   max-width: 420px;
