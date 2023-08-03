@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <p class="text-4xl">helo tail</p>
 
   </div>
 </template>

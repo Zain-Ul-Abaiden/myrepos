@@ -5,7 +5,7 @@
       type="text"
       placeholder="Enter name here"
       required
-      v-model="form.name"
+      v-model="name"
     />
 
     <label>Email:</label>
@@ -13,7 +13,7 @@
       type="email"
       placeholder="Enter email here"
       required
-      v-model="form.email"
+      v-model="email"
     />
 
     <label>Password:</label>
@@ -21,7 +21,7 @@
       type="password"
       placeholder="Enter password here"
       required
-      v-model="form.password"
+      v-model="password"
     />
     <div v-if="passwordError" class="error">{{ passwordError }}</div>
 
@@ -30,15 +30,15 @@
       type="password"
       placeholder="Enter again password"
       required
-      v-model="form.confirmPassword"
+      v-model="confirmPassword"
     />
 
-    <!-- <div class="submit">
+    <div class="submit">
             <button @click="">Create an Account</button>
-        </div> -->
-    <router-link to="/login">
-      <button class="submit">Submit</button>
-    </router-link>
+        </div>
+    <!-- <router-link to="/login">
+      <v-btn class="submit">Submit</v-btn>
+    </router-link> -->
   </form>
 </template>
 
@@ -50,14 +50,13 @@ export default {
       props: {
         msg: String,
       },
-      form: {
+
         name: "",
         email: "",
         password: "",
         passwordError: "",
         confrimPassword: "",
-      },
-      error: [],
+  
     };
   },
   methods: {
@@ -67,24 +66,6 @@ export default {
         this.password.length > 7
           ? ""
           : "Password must be at least 8 chars long";
-    
-      this.error = [];
-      const usernamePattern =
-        /^(?=.*[0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/\-='|"'])\S+$/;
-      const passwordPattern =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\/\-='|"])[a-zA-Z0-9!@#$%^&*()_+{}\[\]:;<>,.?~\\/\-='|"']{8,}$/;
-      // const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-      if (this.name !== "" && !usernamePattern.test(this.name)) {
-        this.error.push("Invalid Name");
-      } else if (this.password !== "" && !passwordPattern.test(this.password)) {
-        this.error.push("Invalid Password");
-      } else if (this.password !== this.confrimPassword) {
-        this.error.push("Password Does not match");
-      }
-      // else if (obj.email !== "" && !emailPattern.test(obj.email)) {
-      // this.error.push("Invalid Email");
-      // }
 
   }
 }
@@ -128,6 +109,7 @@ button {
 .submit {
   text-align: center;
   margin: 25px 0 15px;
+  margin-left: 100px;
 }
 .error {
   color: #ff0062;

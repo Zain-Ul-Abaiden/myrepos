@@ -7,8 +7,8 @@
       required
       v-model="email"
     />
-    <br />
-    <br />
+    <!-- <br />
+    <br /> -->
 
     <label>Password: </label>
     <input
@@ -21,10 +21,10 @@
     <br />
 
     <div class="login">
-      <button class="btn1">Login</button>
+      <v-btn class="btn1">Login</v-btn>
       <!-- <button class="btn2" ><router-link to="/signup">Sign Up</router-link></button> -->
       <router-link to="/signup">
-        <button class="btn2">Sign Up</button>
+        <v-btn class="btn2">Sign Up</v-btn>
       </router-link>
     </div>
   </form>
@@ -91,9 +91,9 @@ button {
 }
 
 .btn1 {
-  margin-right: 100px;
+  margin-right: 50px;
 }
 .btn2 {
-  margin-left: 100px;
+  margin-left: 50px;
 }
 </style>
